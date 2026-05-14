@@ -3,229 +3,1258 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Balkan Country Finder</title>
+<title>The Montenegro Operation — Petr's Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #fff; color: #1a1a1a; padding: 24px 16px; }
-  h2 { font-size: 20px; font-weight: 600; margin-bottom: 6px; color: #3A3834; }
-  .subtitle { font-size: 14px; color: #888; margin-bottom: 20px; }
-  .filter-group { margin-bottom: 12px; }
-  .filter-label { font-size: 12px; color: #aaa; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
-  .filter-btn {
-    font-size: 13px;
-    font-family: inherit;
-    padding: 6px 14px;
+  :root {
+    --cream: #EFE9DE;
+    --warm-grey: #C7C3C1;
+    --coral: #FF9588;
+    --teal: #5AADAC;
+    --dark: #3d3a36;
+    --mid: #6b6560;
+    --light: #f9f6f1;
+    --white: #ffffff;
+    --border: #e8e2d8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--dark);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(to right, var(--coral), var(--teal));
+  }
+
+
+
+  .header-inner { max-width: 900px; margin: 0 auto; }
+
+  .header-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 20px;
+    padding: 5px 14px;
+    border: 1px solid rgba(90,173,172,0.3);
+    border-radius: 20px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .header-sub {
+    font-size: 15px;
+    color: var(--warm-grey);
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 36px;
+  }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: rgba(255,255,255,0.06);
     border-radius: 8px;
-    border: 1px solid #ddd;
-    background: #fff;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.15s;
+    padding: 20px 24px;
+    max-width: 600px;
   }
-  .filter-btn:hover { background: #f5f5f5; }
-  .filter-btn.active {
-    background: #5AADAC;
-    color: #fff;
-    border-color: #5AADAC;
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
   }
-  .count { font-size: 13px; color: #888; margin-bottom: 16px; margin-top: 8px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
-  .card {
-    background: #fff;
-    border: 1px solid #e8e8e8;
-    border-radius: 12px;
-    padding: 16px;
+
+  .progress-label span:first-child {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+  }
+
+  .progress-count {
+    font-size: 13px;
+    color: var(--teal);
+    font-weight: 500;
+  }
+
+  .progress-bar-bg {
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--coral), var(--teal));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* TIMELINE SPINE */
+  .timeline-nav {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 20px 40px;
+    overflow-x: auto;
+  }
+
+  .timeline-nav-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    align-items: center;
+  }
+
+  .timeline-step {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: center;
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+    padding: 8px 4px;
+    transition: all 0.2s;
   }
-  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-  .card-name { font-size: 15px; font-weight: 600; color: #3A3834; }
-  .card-flag { font-size: 20px; }
-  .badge {
+
+  .timeline-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 60%;
+    width: 80%;
+    height: 1px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .timeline-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 6px;
     font-weight: 500;
+    color: var(--warm-grey);
+    margin-bottom: 8px;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-step.active .timeline-dot {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+  }
+
+  .timeline-step.complete .timeline-dot {
+    background: var(--coral);
+    border-color: var(--coral);
+    color: white;
+  }
+
+  .timeline-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
     white-space: nowrap;
+    font-weight: 400;
+    letter-spacing: 0.05em;
   }
-  .badge-coast { background: #e0f4f4; color: #2a8a8a; }
-  .badge-mountain { background: #e8f4e8; color: #2a6a2a; }
-  .badge-city { background: #f0eeff; color: #5a4aaa; }
-  .badge-all { background: #fff3e0; color: #b86a00; }
-  .card-best { font-size: 13px; color: #444; line-height: 1.5; }
-  .card-best strong { color: #1a1a1a; }
-  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag {
+
+  .timeline-step.active .timeline-label { color: var(--teal); font-weight: 500; }
+  .timeline-step.complete .timeline-label { color: var(--coral); }
+
+  /* MAIN CONTENT */
+  .main { max-width: 900px; margin: 0 auto; padding: 48px 40px 80px; }
+
+  /* PHASE */
+  .phase {
+    margin-bottom: 32px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+
+  .phase-header:hover { background: var(--light); }
+
+  .phase-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .phase-header-text { flex: 1; }
+
+  .phase-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2px;
+  }
+
+  .phase-meta {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  .phase-toggle {
+    font-size: 18px;
+    color: var(--warm-grey);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .phase.open .phase-toggle { transform: rotate(180deg); }
+
+  .phase-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 0;
+  }
+
+  .phase.open .phase-body { display: block; }
+
+  /* STEPS */
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+
+  .step:last-child { border-bottom: none; }
+  .step:hover { background: var(--light); }
+
+  .step-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .step-check::after {
+    content: '✓';
     font-size: 11px;
-    padding: 3px 8px;
-    border-radius: 6px;
-    background: #f5f5f5;
-    color: #666;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.15s;
   }
-  .card-note { font-size: 12px; color: #999; line-height: 1.5; font-style: italic; }
-  .divider { height: 1px; background: #f0f0f0; margin: 12px 0 16px; }
+
+  .step.checked .step-check {
+    background: var(--teal);
+    border-color: var(--teal);
+  }
+
+  .step.checked .step-check::after { opacity: 1; }
+  .step.checked .step-title { text-decoration: line-through; color: var(--warm-grey); }
+
+  .step-content { flex: 1; }
+
+  .step-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .step-desc {
+    font-size: 12.5px;
+    color: var(--mid);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .step-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+
+  .tag-lawyer { background: #fdf0d4; color: #856404; }
+  .tag-admin { background: #d4f0ef; color: #1a7a79; }
+  .tag-finance { background: #ffe0dc; color: #c0392b; }
+  .tag-action { background: #e8eef8; color: #2c4a8a; }
+  .tag-wait { background: #e8e2d8; color: #5a5550; }
+
+  /* PHASE COLORS */
+  .phase-1 .phase-number { background: #fff3cd; color: #856404; }
+  .phase-2 .phase-number { background: #d4f0ef; color: #1a7a79; }
+  .phase-3 .phase-number { background: #ffe0dc; color: #c0392b; }
+  .phase-4 .phase-number { background: #e8eef8; color: #2c4a8a; }
+  .phase-5 .phase-number { background: #f3eaf8; color: #6b3a8a; }
+  .phase-6 .phase-number { background: #d4edd4; color: #2a6e2a; }
+
+  /* INFO BOXES */
+  .info-box {
+    margin: 0 24px 20px;
+    padding: 16px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.6;
+    border-left: 3px solid;
+  }
+
+  .info-box.warning {
+    background: #fff8ed;
+    border-color: var(--coral);
+    color: #7a4a10;
+  }
+
+  .info-box.tip {
+    background: #eaf7f7;
+    border-color: var(--teal);
+    color: #1a5a59;
+  }
+
+  .info-box strong { font-weight: 500; display: block; margin-bottom: 4px; }
+
+  /* SUMMARY CARDS */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .summary-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .summary-card-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 8px;
+  }
+
+  .summary-card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .summary-card-sub {
+    font-size: 12px;
+    color: var(--mid);
+    font-weight: 300;
+  }
+
+  /* TIMELINE TABLE */
+  .timeline-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+    font-size: 13px;
+  }
+
+  .timeline-table thead tr {
+    background: var(--dark);
+  }
+
+  .timeline-table thead th {
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+  }
+
+  .timeline-table tbody tr:nth-child(odd) { background: var(--cream); }
+  .timeline-table tbody tr:nth-child(even) { background: #f7f4f0; }
+
+  .timeline-table tbody td {
+    padding: 12px 16px;
+    color: var(--dark);
+    vertical-align: top;
+  }
+
+  .timeline-table tbody td:first-child { font-weight: 500; white-space: nowrap; }
+
+  /* SECTION HEADER */
+  .section-header {
+    margin-bottom: 24px;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  /* GRADIENT BAR */
+  .gradient-bar {
+    height: 3px;
+    background: linear-gradient(to right, var(--coral), var(--teal));
+    border-radius: 2px;
+    margin-bottom: 32px;
+  }
+
+  /* RISKS */
+  .risk-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .risk-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    background: var(--white);
+  }
+
+  .risk-card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .risk-card-title::before {
+    content: '⚠';
+    font-size: 13px;
+    color: var(--coral);
+  }
+
+  .risk-card p {
+    font-size: 12.5px;
+    color: var(--mid);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .protection-card { border-left: 3px solid var(--teal); }
+
+  .protection-card .risk-card-title::before {
+    content: '🛡';
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 40px 20px; }
+    .main { padding: 32px 20px 60px; }
+    .timeline-nav { padding: 16px 20px; }
+    .risk-grid { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr 1fr; }
+  }
 </style>
 </head>
 <body>
 
-<h2>Find your country</h2>
-<p class="subtitle">Filter by what matters to you to find the right Balkan destination.</p>
-
-<div class="filter-group">
-  <div class="filter-label">Lifestyle</div>
-  <div class="filters" id="lifestyle-filters">
-    <button class="filter-btn" data-filter="coast">I love the coast</button>
-    <button class="filter-btn" data-filter="mountain">I love mountains</button>
-    <button class="filter-btn" data-filter="city">I want city life</button>
-    <button class="filter-btn" data-filter="all-three">I want all three</button>
+<div class="header">
+  <div class="header-inner">
+    <div class="header-tag">Personal Relocation Roadmap — 2025/2027</div>
+    <h1>The <em>Montenegro</em> Operation</h1>
+    <p class="header-sub">Czech OSVČ → Serbian citizen → Montenegrin d.o.o. → Land acquisition → 5-year permanent residency track. Built for Petr. Updated 2026.</p>
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span>Overall Progress</span>
+        <span class="progress-count" id="progressCount">0 / 28 steps complete</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progressBar"></div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="filter-group">
-  <div class="filter-label">Finances & Tax</div>
-  <div class="filters" id="tax-filters">
-    <button class="filter-btn" data-filter="lowest-tax">Lowest tax possible</button>
-    <button class="filter-btn" data-filter="eu-member">EU member</button>
-    <button class="filter-btn" data-filter="budget">Ultra budget</button>
-    <button class="filter-btn" data-filter="property">Good for property investment</button>
+<div class="timeline-nav">
+  <div class="timeline-nav-inner">
+    <div class="timeline-step active" onclick="scrollToPhase(1)">
+      <div class="timeline-dot">1</div>
+      <div class="timeline-label">Now</div>
+    </div>
+    <div class="timeline-step" onclick="scrollToPhase(2)">
+      <div class="timeline-dot">2</div>
+      <div class="timeline-label">Serbia</div>
+    </div>
+    <div class="timeline-step" onclick="scrollToPhase(3)">
+      <div class="timeline-dot">3</div>
+      <div class="timeline-label">Czech Exit</div>
+    </div>
+    <div class="timeline-step" onclick="scrollToPhase(4)">
+      <div class="timeline-dot">4</div>
+      <div class="timeline-label">Montenegro</div>
+    </div>
+    <div class="timeline-step" onclick="scrollToPhase(5)">
+      <div class="timeline-dot">5</div>
+      <div class="timeline-label">Land & Build</div>
+    </div>
+    <div class="timeline-step" onclick="scrollToPhase(6)">
+      <div class="timeline-dot">6</div>
+      <div class="timeline-label">Perm Residency</div>
+    </div>
   </div>
 </div>
 
-<div class="filter-group">
-  <div class="filter-label">Practicalities</div>
-  <div class="filters" id="practical-filters">
-    <button class="filter-btn" data-filter="english-friendly">English friendly</button>
-    <button class="filter-btn" data-filter="easy-visa">Easy visa / residency</button>
-    <button class="filter-btn" data-filter="nightlife">Strong nightlife</button>
-    <button class="filter-btn" data-filter="expat-community">Expat community</button>
-    <button class="filter-btn" data-filter="digital-nomad-visa">Digital nomad visa</button>
-    <button class="filter-btn" data-filter="eu-candidate">EU candidate</button>
+<div class="main">
+
+  <!-- SUMMARY -->
+  <div class="gradient-bar"></div>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="summary-card-label">Total timeline</div>
+      <div class="summary-card-value">~7 years</div>
+      <div class="summary-card-sub">Start to Montenegrin permanent residency</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">D.O.O. running cost</div>
+      <div class="summary-card-value">~€500/mo</div>
+      <div class="summary-card-sub">€30k over 5 years for residency pathway</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Land budget</div>
+      <div class="summary-card-value">≤€100k</div>
+      <div class="summary-card-sub">~500m² plot near coast, held by d.o.o.</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Passports at end</div>
+      <div class="summary-card-value">3</div>
+      <div class="summary-card-sub">Czech + Serbian + Montenegrin (pathway)</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Tax rate (Montenegro)</div>
+      <div class="summary-card-value">~17%</div>
+      <div class="summary-card-sub">Effective all-in at €5k/month income</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Max absence/year</div>
+      <div class="summary-card-value">90 days</div>
+      <div class="summary-card-sub">To keep temp residency & 5yr clock running</div>
+    </div>
   </div>
+
+  <!-- PHASE 1 -->
+  <div class="phase phase-1 open" id="phase-1">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">1</div>
+      <div class="phase-header-text">
+        <div class="phase-title">Preparation — Do This Now</div>
+        <div class="phase-meta">Months 1–6 · Before anything moves</div>
+      </div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+      <div class="info-box tip" style="margin-top:20px;">
+        <strong>Why start here</strong>
+        Serbian citizenship via Article 23 runs in the background — it takes 6–12 months and requires zero physical presence in Serbia. Start it now and it'll be done before you even move to Montenegro.
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Engage a Serbian immigration lawyer for Article 23</div>
+          <div class="step-desc">Find a lawyer in Belgrade who specialises in Article 23 ethnic Serb citizenship applications. They handle document retrieval from Serbian archives, translation, and submission. You don't need to go to Serbia in person.</div>
+          <span class="step-tag tag-lawyer">Lawyer required</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Gather Serbian heritage documents</div>
+          <div class="step-desc">Birth certificates, baptismal records, family history documents proving Serbian ancestry. Old photographs, letters, civil records in Serbian. Your lawyer will advise exactly what's needed for your specific family situation.</div>
+          <span class="step-tag tag-admin">Admin</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Submit Article 23 application + written statement</div>
+          <div class="step-desc">Submit through the Serbian embassy or your lawyer. Include the written statement that you consider Serbia your country. Processing: 6–12 months. You can be anywhere in the world while it processes.</div>
+          <span class="step-tag tag-admin">Admin</span>
+          <span class="step-tag tag-wait">6–12 months wait</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Engage a Montenegrin immigration lawyer</div>
+          <div class="step-desc">Find an immigration lawyer in Montenegro (Podgorica or coastal) experienced with d.o.o. formation and residency applications. Get their advice on current rules before making any financial commitments.</div>
+          <span class="step-tag tag-lawyer">Lawyer required</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Engage a Montenegrin accountant</div>
+          <div class="step-desc">Find a bilingual accountant who can handle the d.o.o. bookkeeping, the €5,000/year tax and social contribution requirements, VAT if applicable, and year-end reporting. Ask your immigration lawyer for a referral.</div>
+          <span class="step-tag tag-lawyer">Professional required</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Engage a Czech tax advisor for OSVČ exit planning</div>
+          <div class="step-desc">Get clear advice on how to formally close your Czech OSVČ without leaving outstanding obligations. Understand the exit tax return requirements, when Czech tax residency officially ends, and what the DTT with Montenegro means for your situation.</div>
+          <span class="step-tag tag-lawyer">Advisor required</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Research land in Montenegro — identify target areas</div>
+          <div class="step-desc">Start researching land near coastal cities (Herceg Novi, Bar, Tivat surroundings). Use Estitor.me, Nekretnina.me, Montenegro Prospects, and ntRealty. Note: olive grove land is classified as agricultural — can only be held by your d.o.o., not personally. Budget ≤€100k for ~500m² near coast.</div>
+          <span class="step-tag tag-action">Research</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Discuss marriage with your girlfriend — plan for family reunification</div>
+          <div class="step-desc">Family reunification in Montenegro only covers legal spouses — a girlfriend does not qualify. If you want her to have her own Montenegrin residency via your d.o.o., she'll need to either marry you or set up her own d.o.o. Plan this now so it doesn't become a problem in Montenegro.</div>
+          <span class="step-tag tag-action">Personal planning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase phase-2" id="phase-2">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">2</div>
+      <div class="phase-header-text">
+        <div class="phase-title">Serbian Citizenship — Background Track</div>
+        <div class="phase-meta">Months 3–15 · Running in parallel with everything else</div>
+      </div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+      <div class="info-box tip" style="margin-top:20px;">
+        <strong>This runs in the background</strong>
+        You don't need to be in Serbia. You don't need to stop anything else. Your lawyer handles the process remotely. This phase overlaps with Phase 1, 3, and 4 simultaneously.
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Application submitted and confirmed received</div>
+          <div class="step-desc">Your lawyer confirms the application is filed with the Ministry of Interior. You receive a reference number. Processing begins — expect 6–12 months with no updates in between.</div>
+          <span class="step-tag tag-wait">Wait period</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Receive citizenship approval notification</div>
+          <div class="step-desc">You'll be notified by your lawyer when the decision is issued. Approval is the norm for straightforward ethnic Serb applications with solid documentation.</div>
+          <span class="step-tag tag-wait">Wait for notification</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Collect Serbian passport</div>
+          <div class="step-desc">Apply for your Serbian passport at the Serbian embassy or in person in Serbia. Serbian passport: 136+ countries visa-free. No residency or tax obligations in Serbia unless you physically move there and cross 183 days.</div>
+          <span class="step-tag tag-admin">In-person required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase phase-3" id="phase-3">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">3</div>
+      <div class="phase-header-text">
+        <div class="phase-title">Czech OSVČ Exit — Clean Break</div>
+        <div class="phase-meta">Month 9–12 · Before moving to Montenegro</div>
+      </div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+      <div class="info-box warning" style="margin-top:20px;">
+        <strong>Critical: don't hold dual tax residency</strong>
+        You must not be simultaneously Czech and Montenegrin tax resident. The sequence matters — close the Czech OSVČ and formally exit Czech tax residency before establishing Montenegro as your centre of vital interests.
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Notify Czech trade office (živnostenský úřad) of OSVČ suspension/closure</div>
+          <div class="step-desc">File the formal notification to suspend or close your Czech trade licence. This can be done online. Your Czech advisor will confirm the exact process and timing relative to your final Czech tax return.</div>
+          <span class="step-tag tag-admin">Admin</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">File Czech exit tax return</div>
+          <div class="step-desc">File your final Czech personal income tax return covering the period up to your departure. Settle any outstanding social (OSSZ) and health insurance (ZP) contributions. Get written confirmation of zero outstanding obligations.</div>
+          <span class="step-tag tag-finance">Finance</span>
+          <span class="step-tag tag-lawyer">Advisor required</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Formally deregister Czech residence / change address</div>
+          <div class="step-desc">Officially change your registered address away from Czech Republic. This is one of the key triggers for ending Czech tax residency. Your Czech advisor will confirm what's required based on your specific situation.</div>
+          <span class="step-tag tag-admin">Admin</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Obtain Czech tax residency exit certificate</div>
+          <div class="step-desc">Get a certificate from the Czech tax authority confirming you are no longer a Czech tax resident. Keep this permanently — you may need it to prove your status to Montenegrin or Serbian authorities.</div>
+          <span class="step-tag tag-admin">Admin</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Transition Apollo payments off PayPal to Wise</div>
+          <div class="step-desc">Set up Wise with EUR/USD account and notify Apollo of your new payment details. Running payments through Wise gives you proper documentation, lower fees, and a clean paper trail for Montenegro's banking and tax system.</div>
+          <span class="step-tag tag-finance">Finance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase phase-4" id="phase-4">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">4</div>
+      <div class="phase-header-text">
+        <div class="phase-title">Montenegro Setup — D.O.O. & Residency</div>
+        <div class="phase-meta">Month 12–14 · The move · 5-year clock starts here</div>
+      </div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+      <div class="info-box tip" style="margin-top:20px;">
+        <strong>The 5-year clock starts when you receive your boravak</strong>
+        Everything from this point counts toward permanent residency — provided you stay 9+ months per year and max 10 months total absence over 5 years.
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Register Montenegrin d.o.o. (€1 minimum capital)</div>
+          <div class="step-desc">Your immigration lawyer registers the d.o.o. with the Montenegrin Business Register (CRPS). You are the sole director and shareholder. Takes approximately 5–7 business days. The company is your residency basis AND the legal entity that will hold the land.</div>
+          <span class="step-tag tag-lawyer">Lawyer required</span>
+          <span class="step-tag tag-admin">5–7 days</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Arrive in Montenegro — register address within 24 hours</div>
+          <div class="step-desc">Upon arrival, you must register your address with the local police within 24 hours. If staying in a private rental, your landlord must do this — confirm it happens. Hotels do it automatically. Keep the registration slip (prijava boravka).</div>
+          <span class="step-tag tag-action">Day 1</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Open Montenegrin bank account</div>
+          <div class="step-desc">Open both a personal and company bank account. Best options: Erste Bank (most expat-friendly), CKB (largest ATM network), NLB Bank (low fees). Bring passport, company registration documents, proof of address, and 6 months of bank statements from your home bank. In-person only.</div>
+          <span class="step-tag tag-finance">Finance</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Apply for temporary residence permit (boravak) via d.o.o.</div>
+          <div class="step-desc">Submit your temp residence application to the Ministry of Interior (MUP) based on your d.o.o. director status. Processing: 30–40 days. Documents needed: passport, company registration, proof of address, health insurance, bank statement showing €3,650+, clean criminal record (apostilled, <6 months old), translated into Montenegrin.</div>
+          <span class="step-tag tag-admin">30–40 days</span>
+          <span class="step-tag tag-lawyer">Lawyer handles</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Receive boravak card — collect JMBG</div>
+          <div class="step-desc">Your residence card (boravak) is issued. Your JMBG (personal identification number) is assigned automatically with it. This is your Montenegrin tax ID for personal purposes. Keep both permanently — they're needed for banking, property, and renewals.</div>
+          <span class="step-tag tag-action">Day the clock starts</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Get PIB (business tax ID) for the d.o.o.</div>
+          <div class="step-desc">Register the company's PIB with the Montenegrin Tax Administration (Poreska uprava). This is needed for invoicing, VAT registration if applicable, and all business transactions. Your accountant handles this.</div>
+          <span class="step-tag tag-admin">Admin</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Apply for girlfriend's family reunification (if married)</div>
+          <div class="step-desc">Once you physically have your boravak card in hand, your spouse can apply for family reunification. She cannot apply simultaneously with you — the sequence is mandatory. Documents: marriage certificate (apostilled, translated), her passport, health insurance, proof of shared accommodation. Her 5-year clock also starts here.</div>
+          <span class="step-tag tag-admin">After your boravak arrives</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 5 -->
+  <div class="phase phase-5" id="phase-5">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">5</div>
+      <div class="phase-header-text">
+        <div class="phase-title">Land Acquisition & Development</div>
+        <div class="phase-meta">Month 14–24 · The actual project</div>
+      </div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+      <div class="info-box warning" style="margin-top:20px;">
+        <strong>Can you hold 500m² personally? It depends on zoning.</strong>
+        If the plot is classified as urbanised building land — yes, foreigners can personally own plots up to 5,000m², so 500m² is fine. If the plot is classified as agricultural or forest land (olive groves, farmland) — no, regardless of size. A foreigner can only personally own agricultural land up to 5,000m² if a registered residential building is already on it and included in the sale. For a bare agricultural plot, the d.o.o. is required. Check the zoning classification (List nepokretnosti) before assuming anything.
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Identify target plots — verify cadastre before anything</div>
+          <div class="step-desc">Search Estitor.me, Nekretnina.me, Montenegro Prospects, ntRealty. Once you identify candidates, check ekatastar.co.me before paying any deposit. Verify ownership, encumbrances, and critically — zoning classification. Urbanised building land: you can hold it personally. Agricultural/olive grove land: must go through the d.o.o. Also verify legal road access, no liens, and building permits where applicable.</div>
+          <span class="step-tag tag-action">Research first</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Engage a Montenegrin real estate lawyer (independent of the agent)</div>
+          <div class="step-desc">Your real estate lawyer must be completely independent of your agent. They verify the cadastre extract (List nepokretnosti), confirm building permits match actual land, check zoning, and review the purchase contract. This is non-negotiable for land purchases.</div>
+          <span class="step-tag tag-lawyer">Independent lawyer required</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Sign pre-contract and pay deposit (10%) via bank transfer</div>
+          <div class="step-desc">Pre-contract is signed by your d.o.o. (not personally). 10% deposit paid via traceable bank transfer only — no cash. If seller withdraws, they pay double deposit back. If you withdraw, deposit is forfeited.</div>
+          <span class="step-tag tag-finance">Finance</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Final notarised contract — pay transfer tax</div>
+          <div class="step-desc">Final contract signed at a Montenegrin public notary in the d.o.o.'s name. Transfer tax (3–6% progressive) due within 15 days of contract. For a €100k plot: ~€3,000 in transfer tax. All foreign documents must be translated by a certified court translator.</div>
+          <span class="step-tag tag-finance">Finance</span>
+          <span class="step-tag tag-admin">Pay within 15 days</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Register d.o.o. ownership in the cadastre</div>
+          <div class="step-desc">Ownership only officially transfers when the cadastre is updated in the d.o.o.'s name. Registration takes 15–30 days in most areas. You are not legally the owner until this is complete — don't assume the signed contract is enough.</div>
+          <span class="step-tag tag-admin">15–30 days</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Obtain building permits and begin development planning</div>
+          <div class="step-desc">Work with a Montenegrin architect and planning lawyer to understand what can be built on the plot, what permits are required, and what the zoning allows. This is a long process in Montenegro — start early. Any construction without permits risks the August 2025 legalisation law blocking future registration or sale.</div>
+          <span class="step-tag tag-lawyer">Architect + lawyer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 6 -->
+  <div class="phase phase-6" id="phase-6">
+    <div class="phase-header" onclick="togglePhase(this)">
+      <div class="phase-number">6</div>
+      <div class="phase-header-text">
+        <div class="phase-title">5-Year Track — Permanent Residency</div>
+        <div class="phase-meta">Years 1–5 in Montenegro · Annual renewals · The long game</div>
+      </div>
+      <div class="phase-toggle">▼</div>
+    </div>
+    <div class="phase-body">
+      <div class="info-box tip" style="margin-top:20px;">
+        <strong>The rules are simple — stick to them</strong>
+        Stay 9+ months/year, keep the d.o.o. active and paying €5k/year in taxes/contributions, renew your boravak annually, keep your absence spreadsheet updated. After 5 years you qualify for permanent residency (stalni boravak).
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Keep an absence spreadsheet — every trip in and out</div>
+          <div class="step-desc">Track every date you leave and return to Montenegro. Max 90 days per year to keep temp residency valid. Max 10 months total over 5 years to qualify for permanent residency. The MUP will check this when you apply for permanent residency. Kate in Montenegro recommends exactly this approach.</div>
+          <span class="step-tag tag-action">Ongoing</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Renew boravak annually (30 days before expiry)</div>
+          <div class="step-desc">Apply for renewal no later than 30 days before your current permit expires. Documents needed each year: renewed criminal record (apostilled, <6 months), health insurance, proof of company activity and tax payments, proof of accommodation, bank statement. Your lawyer handles this — don't let it lapse.</div>
+          <span class="step-tag tag-admin">Annual — every year</span>
+          <span class="step-tag tag-lawyer">Lawyer handles</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Ensure d.o.o. pays €5,000+/year in taxes and social contributions</div>
+          <div class="step-desc">This is the minimum required to renew company-based residency. Your accountant files monthly returns and ensures the contributions are paid. Keep annual proof of payment — needed for each boravak renewal.</div>
+          <span class="step-tag tag-finance">Finance — annual</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">File Montenegrin personal income tax returns annually</div>
+          <div class="step-desc">As a Montenegrin tax resident earning foreign income through your company, you'll need to file annually. Your accountant handles this. Effective rate at your income level: ~17% all-in (15% income tax bracket + capped social contributions). Czech-Montenegro DTT protects you from double taxation.</div>
+          <span class="step-tag tag-finance">Finance — annual</span>
+        </div>
+      </div>
+
+      <div class="step" onclick="toggleStep(this)">
+        <div class="step-check"></div>
+        <div class="step-content">
+          <div class="step-title">Apply for permanent residency (stalni boravak) after 5 years</div>
+          <div class="step-desc">After 5 continuous years of temp residency with total absences under 10 months, apply for permanent residency. Required: clean criminal record, proof of 5 years continuous residence, company still active, accommodation proof. Permanent residency grants nearly all rights of Montenegrin citizens except voting.</div>
+          <span class="step-tag tag-action">Year 5</span>
+          <span class="step-tag tag-lawyer">Lawyer handles</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE TABLE -->
+  <div class="gradient-bar"></div>
+  <div class="section-header">
+    <div class="section-tag">Overview</div>
+    <div class="section-title">Timeline at a Glance</div>
+  </div>
+
+  <table class="timeline-table">
+    <thead>
+      <tr>
+        <th>Phase</th>
+        <th>Timeline</th>
+        <th>Key action</th>
+        <th>Running in parallel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Preparation</td>
+        <td>Now → Month 6</td>
+        <td>Engage lawyers, start Article 23, research land</td>
+        <td>Article 23 application running</td>
+      </tr>
+      <tr>
+        <td>Serbian citizenship</td>
+        <td>Month 3 → 15</td>
+        <td>Application submitted, wait for approval</td>
+        <td>No physical presence needed</td>
+      </tr>
+      <tr>
+        <td>Czech OSVČ exit</td>
+        <td>Month 9 → 12</td>
+        <td>Close trade licence, exit tax return, exit certificate</td>
+        <td>Before moving to Montenegro</td>
+      </tr>
+      <tr>
+        <td>Montenegro d.o.o. + residency</td>
+        <td>Month 12 → 14</td>
+        <td>Register company, move, get boravak</td>
+        <td>5-year clock starts</td>
+      </tr>
+      <tr>
+        <td>Land acquisition</td>
+        <td>Month 14 → 24</td>
+        <td>Buy land through d.o.o., begin development planning</td>
+        <td>Renewals, tax filing ongoing</td>
+      </tr>
+      <tr>
+        <td>5-year residency track</td>
+        <td>Years 1 → 5</td>
+        <td>Annual renewals, stay 9+ months/year, build</td>
+        <td>Serbian passport already in hand</td>
+      </tr>
+      <tr>
+        <td>Permanent residency</td>
+        <td>Year 5–6</td>
+        <td>Apply for stalni boravak</td>
+        <td>Czech + Serbian + Montenegrin perm res</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- RISKS -->
+  <div class="gradient-bar"></div>
+  <div class="section-header">
+    <div class="section-tag">Risk Management</div>
+    <div class="section-title">Key Risks & Protections</div>
+  </div>
+
+  <div class="risk-grid">
+    <div class="risk-card">
+      <div class="risk-card-title">Dual tax residency trap</div>
+      <p>If you're still Czech tax resident when you establish Montenegro as your centre of vital interests, you could be taxed in both countries simultaneously. Prevention: close Czech OSVČ and obtain exit certificate before establishing Montenegro tax residency. The Czech–Montenegro double taxation treaty (DTT) protects you once you're properly exited — but sequencing matters.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-card-title">Absence limit breach</div>
+      <p>Exceeding 90 days away per year risks your temp residency renewal — the 5-year clock resets from zero. Prevention: keep an absence spreadsheet updated with every trip in and out.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-card-title">D.O.O. minimum tax shortfall</div>
+      <p>Failing to pay €5,000/year in taxes and contributions means your residency renewal is denied. Prevention: your accountant manages this monthly — don't leave it to year-end.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-card-title">Land permit issues</div>
+      <p>Buying land that's misclassified, has no legal road access, or has outstanding construction permit issues. Prevention: cadastre check before any deposit, independent lawyer, and zoning verification.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-card-title">Girlfriend residency gap</div>
+      <p>If unmarried, she has no automatic residency rights through you. Family reunification is spouses only. Prevention: marriage before the move, or she sets up her own d.o.o.</p>
+    </div>
+    <div class="risk-card">
+      <div class="risk-card-title">Montenegro law changes</div>
+      <p>Rules changed significantly in January 2026 and are still evolving toward EU accession standards. Prevention: maintain a relationship with your immigration lawyer who tracks changes as they happen.</p>
+    </div>
+
+    <div class="risk-card protection-card">
+      <div class="risk-card-title">Czech–Montenegro double taxation treaty (DTT)</div>
+      <p>A double taxation treaty exists between Czech Republic and Montenegro (signed 2004, updated via OECD MLI). Income earned and taxed in Montenegro cannot be taxed again in Czech Republic. Once you're formally exited from Czech tax residency and established in Montenegro, this treaty ensures clean separation. Keep your Czech exit certificate permanently.</p>
+    </div>
+    <div class="risk-card protection-card">
+      <div class="risk-card-title">Serbian citizenship = no Serbian tax</div>
+      <p>Serbia taxes by residency, not citizenship. Holding a Serbian passport while living in Montenegro creates zero Serbian tax liability — provided you don't cross 183 days in Serbia.</p>
+    </div>
+    <div class="risk-card protection-card">
+      <div class="risk-card-title">D.O.O. = land ownership flexibility</div>
+      <p>Your d.o.o. can hold agricultural land, olive grove land, and plots over 5,000m² — things you personally cannot own as a foreigner. The company structure unlocks the full range of land purchase options.</p>
+    </div>
+    <div class="risk-card protection-card">
+      <div class="risk-card-title">Grandfathering on property rules</div>
+      <p>If you buy property and obtain residency under current rules, you are grandfathered if rules change later. Early movers are protected. Get in before Montenegro's EU accession tightens standards further.</p>
+    </div>
+  </div>
+
+  <!-- MONTHLY COSTS -->
+  <div class="gradient-bar"></div>
+  <div class="section-header">
+    <div class="section-tag">Financial Overview</div>
+    <div class="section-title">Monthly Running Costs</div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="summary-card">
+      <div class="summary-card-label">D.O.O. taxes & contributions</div>
+      <div class="summary-card-value">~€417</div>
+      <div class="summary-card-sub">€5,000/year minimum requirement</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Accountant</div>
+      <div class="summary-card-value">€50–100</div>
+      <div class="summary-card-sub">Monthly bookkeeping & compliance</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Bank fees</div>
+      <div class="summary-card-value">€10–20</div>
+      <div class="summary-card-sub">Personal + company accounts</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Total d.o.o. overhead</div>
+      <div class="summary-card-value">~€500</div>
+      <div class="summary-card-sub">~€30,000 over 5 years for perm residency</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Land purchase (one-time)</div>
+      <div class="summary-card-value">≤€100k</div>
+      <div class="summary-card-sub">+ ~€3,000 transfer tax + ~€1,000 legal fees</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-card-label">Income tax rate (Montenegro)</div>
+      <div class="summary-card-value">15%</div>
+      <div class="summary-card-sub">Top personal income tax rate. €5k/year minimum keeps d.o.o. alive until permanent residency</div>
+    </div>
+  </div>
+
 </div>
-
-<div class="divider"></div>
-<div class="count" id="count">Showing all 6 countries</div>
-
-<div class="cards" id="cards"></div>
 
 <script>
-const countries = [
-  {
-    name: "Serbia",
-    flag: "🇷🇸",
-    badge: "city",
-    badgeLabel: "City & mountains",
-    bestFor: "People who want vibrant city life, the lowest taxes in the region, and a deep cultural experience.",
-    note: "Belgrade is one of Europe's most underrated cities — intense nightlife, incredible food, and a warmth that's hard to find elsewhere. Flat 15% tax on everything.",
-    tags: ["city", "mountain", "lowest-tax", "budget", "nightlife", "property", "english-friendly", "easy-visa"]
-  },
-  {
-    name: "Croatia",
-    flag: "🇭🇷",
-    badge: "coast",
-    badgeLabel: "Coast & city",
-    bestFor: "People who want EU membership, a stunning Adriatic coastline, and a proper European capital in Zagreb.",
-    note: "The most expensive in this guide but still 40% cheaper than Western Europe. EU membership makes visas and residency straightforward. Remote workers are currently not subject to income tax in Croatia — one of the best deals in Europe.",
-    tags: ["coast", "city", "eu-member", "english-friendly", "expat-community", "easy-visa", "property", "digital-nomad-visa"]
-  },
-  {
-    name: "Montenegro",
-    flag: "🇲🇪",
-    badge: "all-three",
-    badgeLabel: "Coast, city & mountains",
-    bestFor: "People who want it all — dramatic coastline, mountains, and Europe's lowest corporate tax at 9%.",
-    note: "Porto Montenegro is the Monaco of the Balkans. Bay of Kotor might be the most beautiful place in Europe. EU candidate country — strong long-term positioning.",
-    tags: ["coast", "city", "mountain", "all-three", "lowest-tax", "budget", "property", "eu-candidate", "english-friendly", "easy-visa"]
-  },
-  {
-    name: "Greece",
-    flag: "🇬🇷",
-    badge: "coast",
-    badgeLabel: "Coast & islands",
-    bestFor: "People drawn to the Mediterranean dream — islands, history, food, and a proper digital nomad visa.",
-    note: "Athens is a world-class city with incredible history and nightlife. The islands offer a variety of lifestyle impossible to match anywhere else.",
-    tags: ["coast", "city", "digital-nomad-visa", "english-friendly", "expat-community", "eu-member", "nightlife", "property"]
-  },
-  {
-    name: "Albania",
-    flag: "🇦🇱",
-    badge: "coast",
-    badgeLabel: "Coast & mountains",
-    bestFor: "Early movers who want the most affordable country in the region with incredible upside potential.",
-    note: "The dark horse. Tirana is growing fast, Sarandë on the coast is stunning. Digital nomad visa requires ~€9,800/year income — the most accessible threshold in the region. Cheapest country in the Balkans with infrastructure developing rapidly.",
-    tags: ["coast", "mountain", "budget", "lowest-tax", "property", "easy-visa", "eu-candidate", "digital-nomad-visa"]
-  },
-  {
-    name: "Bosnia & Herzegovina",
-    flag: "🇧🇦",
-    badge: "mountain",
-    badgeLabel: "Mountains & culture",
-    bestFor: "People looking for raw authenticity, ultra-low costs, and one of the most underrated cultures in Europe.",
-    note: "Mostar is jaw-droppingly beautiful. Sarajevo has a unique layered culture unlike anywhere else. Cheapest cost of living in the region by a significant margin.",
-    tags: ["mountain", "city", "budget", "lowest-tax", "easy-visa", "eu-candidate"]
-  }
-];
+  let totalSteps = 0;
+  let checkedSteps = 0;
 
-const badgeClasses = {
-  coast: "badge-coast",
-  mountain: "badge-mountain",
-  city: "badge-city",
-  "all-three": "badge-all"
-};
-
-let activeFilters = new Set();
-
-function renderCards(filtered) {
-  const container = document.getElementById("cards");
-  const count = document.getElementById("count");
-  count.textContent = filtered.length === countries.length
-    ? `Showing all ${countries.length} countries`
-    : `Showing ${filtered.length} of ${countries.length} countries`;
-
-  container.innerHTML = filtered.map(c => `
-    <div class="card">
-      <div class="card-top">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="card-flag">${c.flag}</span>
-          <span class="card-name">${c.name}</span>
-        </div>
-        <span class="badge ${badgeClasses[c.badge]}">${c.badgeLabel}</span>
-      </div>
-      <div class="card-best"><strong>Best for:</strong> ${c.bestFor}</div>
-      <div class="card-tags">${c.tags.map(t => `<span class="tag">${t.replace(/-/g,' ')}</span>`).join('')}</div>
-      <div class="card-note">${c.note}</div>
-    </div>
-  `).join('');
-}
-
-function applyFilters() {
-  if (activeFilters.size === 0) {
-    renderCards(countries);
-    return;
-  }
-  const filtered = countries.filter(c =>
-    [...activeFilters].every(f => c.tags.includes(f))
-  );
-  renderCards(filtered);
-}
-
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const filter = btn.dataset.filter;
-    if (activeFilters.has(filter)) {
-      activeFilters.delete(filter);
-      btn.classList.remove('active');
-    } else {
-      activeFilters.add(filter);
-      btn.classList.add('active');
-    }
-    applyFilters();
+  document.addEventListener('DOMContentLoaded', () => {
+    totalSteps = document.querySelectorAll('.step').length;
+    updateProgress();
   });
-});
 
-renderCards(countries);
+  function toggleStep(el) {
+    el.classList.toggle('checked');
+    checkedSteps = document.querySelectorAll('.step.checked').length;
+    updateProgress();
+    updateTimelineNav();
+  }
+
+  function togglePhase(header) {
+    const phase = header.parentElement;
+    phase.classList.toggle('open');
+  }
+
+  function updateProgress() {
+    const pct = totalSteps > 0 ? (checkedSteps / totalSteps) * 100 : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+    document.getElementById('progressCount').textContent = checkedSteps + ' / ' + totalSteps + ' steps complete';
+  }
+
+  function updateTimelineNav() {
+    const phases = document.querySelectorAll('.phase');
+    const dots = document.querySelectorAll('.timeline-step');
+
+    phases.forEach((phase, i) => {
+      const steps = phase.querySelectorAll('.step');
+      const checked = phase.querySelectorAll('.step.checked');
+      const dot = dots[i];
+      if (!dot) return;
+
+      if (checked.length === steps.length && steps.length > 0) {
+        dot.classList.add('complete');
+        dot.classList.remove('active');
+      } else if (checked.length > 0) {
+        dot.classList.add('active');
+        dot.classList.remove('complete');
+      } else {
+        dot.classList.remove('active', 'complete');
+      }
+    });
+  }
+
+  function scrollToPhase(n) {
+    const el = document.getElementById('phase-' + n);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!el.classList.contains('open')) el.classList.add('open');
+    }
+  }
 </script>
+
 </body>
 </html>
